@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('run collection') {
       steps {
-        sh 'run -t postman/newman run -h'
+        sh 'newman --version'
         sh 'run -v ${WORKSPACE}:/etc/newman --workdir /etc/newman -t postman/newman run Trello.json --color off --disable-unicode'
       }
     }
