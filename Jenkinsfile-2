@@ -1,0 +1,24 @@
+pipeline {
+  agent any
+  stages {
+    stage('run collection') {
+      steps {
+        sh 'newman --version'
+        sh 'newman run Trello.json --color off --disable-unicode --reporters cli,htmlextra --reporter-htmlextra-export newman/report.html'
+      }
+    }
+  }
+  post {
+        always {
+            publishHTML target: [
+                reportName: 'Newman',
+                reportDir: 'newman',
+                reportFiles: 'report.html',
+                reportTitles: 'Postman API tests',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: false
+            ]
+        }
+    }
+}
