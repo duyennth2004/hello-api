@@ -4,7 +4,7 @@ pipeline {
     stage('run collection') {
       steps {
         sh 'newman --version'
-        sh 'run -v ${WORKSPACE}:/etc/newman --workdir /etc/newman -t postman/newman run Trello.json --color off --disable-unicode'
+        sh 'newman run Trello.json --color off --disable-unicode'
       }
     }
   }
